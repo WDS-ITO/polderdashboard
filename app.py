@@ -1,22 +1,27 @@
 from flask import Flask, render_template, request,session,redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
-class User:
-	def __init__(self,id,username,password):
-		self.id = id 
-		self.username = username
-		self.password = password
-
-	def __repr__(self):
-		return f'<User: {self.username}'
+from flask_bcrypt import Bcrypt
 
 
-users = []
-
-users.append(User(id=1,username='karen', password='nerak'))
 
 app = Flask(__name__)
 app.secret_key = 'nerak'
 app.permanent_session_life = timedelta(minutes=10)
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///site.db'
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+
+class User(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(20), unique=True, nullable=False)
+	password = db.Column(db.String(60), nullable=False)
+
+	def __repr__(self):
+		return f'<User: {self.username}'
+
 
 
 @app.route('/', methods=['GET','POST'])
@@ -25,10 +30,10 @@ def home():
 		session.permanent = True
 		username = request.form['username']
 		password = request.form['password']
-		user  = [x for x in users if x.username==username][0]
-		if user and user.password==password:
-			
-			session['user_id'] = user.id
+		userid = 1
+		user  = User.query.filter_by(username=username).first()
+		if user and bcrypt.check_password_hash(user.password,password):	
+			session['user_id'] = userid
 			return redirect(url_for('dashboard'))
 
 		return redirect(url_for('home'))
@@ -44,7 +49,7 @@ def home():
 def dashboard():
 	if 'user_id' in session:
 		user_id = session['user_id']
-		username = users[user_id-1].username
+		username = 'karen'
 		return render_template("index.html", username=username)
 	else:
 		return redirect(url_for('home')) 
