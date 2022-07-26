@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+/* root variables*/
+:root {
+	--color-primary: #7380ec;
+	--color-danger:  #ff7782;
+	--color-success:  #41f1b6;
+	--color-warning: #ffbb55;
+	--color-white:  #fff;
+	--color-info-dark:  #7d8da1;
+	--color-info-light:  #dce1eb;
+	--color-dark: #363949;
+	--color-light:  rgba(132,139,200,0.18);
+	--color-primary-variant: #111e88;
+	--color-dark-variant: #677483;
+	--color-background: #f6f6f9;
+
+	--card-border-radius:  2rem;
+	--border-radius-1:  0.4rem;
+	--border-radius-2:  0.8rem;
+	--border-radius-3:  1.2rem;
+
+	--card-padding:  1.8rem;
+	--padding: 1.2rem;
+
+	--box-shadow: 0 2rem 3rem var(--color-light);
+
+
+}
+
+/*==============================  end of root variables ============*/
+* {
+	margin: 0;
+	padding: 13px;
+	outline: 0;
+	appearance:  none;
+	border: 0;
+	text-decoration: none;
+	list-style: none;
+	box-sizing: border-box;
+
+}
+
+
+html {
+	font-size: 14px;
+
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	font-family: poppins, sans-serif;
+	font-size: 0.88rem;
+	background: var(--color-primary);
+	user-select: none;
+	overflow-x:hidden ;
+	color: var(--color-dark);
+
+}
+h1 {
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-size: 22px;
+
+}
+
+/*======= Login box ============*/
+.login-panel {
+	width: 320px;
+	height: 420px;
+	top: 50%;
+	left: 50%;
+	background: var(--color-background);
+	position: absolute;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+
+
+}
+
+.login-panel span{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	font-size: 70px;
+	left: calc(50% - 50px);
+
+}
+
+.login-panel p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+.login-panel input{
+	width: 100%;
+	margin-bottom: 20px;
+
+}
+
+.login-panel input[type='text'], input[type='password']{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	font-size: 16px;
+}
+
+
+.login-panel input[type='submit']{
+	border: none;
+	outline: none;
+	height: 40px;
+	color: var(--color-white);
+	background: var(--color-dark);
+	font-size: 18px;
+	border-radius: 20px;
+}
+.login-panel input[type='submit']:hover{
+	cursor: pointer;
+	background: var(--color-white);
+	color: var(--color-dark);
+}
+
+.login-panel a{
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: black;
+}
+
+.login-panel a:hover{
+	color: darkred;
+}
+
+/*End of Login box */
