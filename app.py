@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
-app.secret_key = 'nerak'
+app.secret_key = 'polder_dashboard'
 app.permanent_session_life = timedelta(minutes=10)
 
 
