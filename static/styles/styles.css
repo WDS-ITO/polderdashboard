@@ -180,6 +180,17 @@ aside .close {
 	display: none;
 }
 
+.date-error{
+	
+	background: var(--color-danger);
+	margin: 30px;
+}
+.date-error p{
+	text-align: center;
+	color: var(--color-dark);
+	font-weight: bold;
+}
+
 /*================ sidebar=================== */
 aside .sidebar {
 	display: flex;

@@ -6,7 +6,20 @@
 			<form action="" method="POST">
 				<div class="date_container">
 					<h3>Please enter the time period to get data from</h3>
+
 					<p>Note: We started collecting analytics on July 11th 2022</p>
+
+
+					{% with messages= get_flashed_messages() %}
+				        {% if messages %}
+				            {% for msg in messages %}
+				            <div class="date-error">
+				              <p>{{msg}}</p>
+				            </div>
+				            {% endfor %}
+				        {% endif %}
+				      {% endwith %}
+						
 				<div class="date start">
 					<h3>Start Date</h3>
 					<input type="date" name="start_date" >	

@@ -4,6 +4,7 @@ from datetime import timedelta
 from flask_bcrypt import Bcrypt
 from ga import ga
 from Polder import polder
+from datetime import *
 
 
 
@@ -63,6 +64,27 @@ def dashboard():
 		if request.method =='POST':
 			start_date = request.form['start_date']
 			end_date = request.form['end_date']
+			
+			if start_date > end_date:
+				flash('Please enter correct dates')
+				start_date = '2022-07-01'
+				end_date = 'today'
+			if start_date=='' or end_date == '' :
+				flash('Please enter a start date and end date')
+				start_date = '2022-07-01'
+				end_date = 'today'
+
+			if start_date < '2022-07-11':
+				flash('please enter a start date after July 11th')
+				start_date = '2022-07-01'
+				end_date = 'today'
+
+			if start_date > str(date.today()):
+				flash('You cannot enter a date in the future')
+				start_date = '2022-07-01'
+				end_date = 'today'
+
+			
 			
 
 		return render_template("dashboard.html", username=username, terms_dict= ga.get_terms(), analytics_dict=ga.get_analytics_date(start_date,end_date))
