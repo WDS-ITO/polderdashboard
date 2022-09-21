@@ -138,4 +138,15 @@ h1 {
 	color: darkred;
 }
 
+
+.login-panel .error{
+	
+	background: var(--color-danger);
+	margin-top: -30px;
+	margin-bottom: 10px;
+}
+
+.login-panel .error p{
+	text-align: center;
+}
 /*End of Login box */

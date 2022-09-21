@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+		<!--- main section ------>
+		<main>
+			<h1>Dashboard</h1>
+			<form action="" method="POST">
+				<div class="date_container">
+					<h3>Please enter the time period to get data from</h3>
+					<p>Note: We started collecting analytics on July 11th 2022</p>
+				<div class="date start">
+					<h3>Start Date</h3>
+					<input type="date" name="start_date" >	
+				</div>
+				<div class="date end">
+					<h3>End Date</h3>
+					<input type="date" name="end_date" >	
+				</div>
+				<div class="submit_button">
+					<input type="Submit" name="" value="Get data">
+				</div>
+				</div>
+				
+			</form>
+
+			<div class="insights">
+				<!-----User count----->
+				<div class="sales">
+					<span class="material-icons-sharp">analytics</span>
+					
+					
+					<div class="middle">
+						<div class="left">
+							<h3> Total users</h3>
+							<h1> {{analytics_dict['unique_users']+' users'}} </h1>
+						</div>
+						
+					</div>
+					<small> Total unique users</small>
+				</div>
+				<!----- end of User count----->
+
+				<!-----Bounce rate count----->
+				<div class="expenses">
+					<span class="material-icons-sharp">star</span>
+					<div class="middle">
+						<div class="left">
+							<h3>Bounce Rate</h3>
+							<h1> {{analytics_dict['bounce_rate'] +'%'}} </h1>
+						</div>
+						
+					</div>
+					<small>Sessions in which the person left the property from the first page</small>
+					
+				</div>
+				<!----- end of bounce rate----->
+
+				<!-----Page Initial load time----->
+				<div class="income">
+					<span class="material-icons-sharp">pending</span>
+					<div class="middle">
+						<div class="left">
+							<h3> Initial Page Load Time</h3>
+							<h1> {{analytics_dict['load_time']+'sec'}} </h1>
+						</div>
+						
+					</div>
+				<small>The average time (in seconds) pages from the sample set take to load, from initiation of the pageview</small>
+				</div>
+				<!----- end of initial page load time ----->
+
+			</div>
+			<!----- end of insights ----->
+			
+			<div class="recent-orders">
+				<h2> Sources Of Users</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>name</th>
+							<th>Amount of users</th>
+							
+						</tr>
+
+					</thead>
+					<tbody>
+						{% for data in analytics_dict['sources'] %}
+						<tr>
+							<td> {{data['source']}}</td>
+							<td> {{data['amount']}}</td>
+							
+						</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+				<a href="#">Show All</a>
+			</div>	
+		</main>
+		<!-- END of main section -->
+		{% endblock %}
+
+
+
+

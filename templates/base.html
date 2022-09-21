@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='/styles/styles.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
+<title>Dashboard</title>
+</head>
+<body>
+	<div class="container">
+		<!------side bar------------------->
+		<aside>
+			<div class="top">
+				<div class="logo">
+					<a href="https://search.polder.info/">
+					<img src="../static/images/WDS-logo.png">
+					<h2> SEARCH POLDER </h2>
+
+					</a>
+				</div>
+				<div class="close" id='close-btn'>
+					<span class="material-icons-sharp">close</span>
+					
+				</div>
+
+				
+			</div>
+			<div class='sidebar' id="sidebar">
+				<a href="{{ url_for('dashboard') }}"  id='Dashboard'>
+					<span class="material-icons-sharp">grid_view</span>
+					<h3> Dashboard</h3>
+					
+				</a>
+
+				<a href="{{ url_for('search_terms') }}"  id='search_terms'>
+					<span class="material-icons-sharp">pageview</span>
+					<h3> Search Terms </h3>
+					
+				</a> 
+
+				<a href="{{ url_for('repositories') }}"  id='repositories'>
+					<span class="material-icons-sharp">pageview</span>
+					<h3> Repositories </h3>
+					
+				</a> 
+
+   
+				<!--<a href="{{ url_for('analytics') }}"  id='analytics'>
+					<span class="material-icons-sharp">insights</span>
+					<h3> Get Analytics</h3>
+					
+				</a>
+			-->
+				
+				<a href="./"  id='logout'>
+					<span class="material-icons-sharp">logout</span>
+					<h3> Logout</h3>
+					
+				</a>
+				
+				
+			</div>
+		</aside>
+		<!------ end of side bar-------->
+		{% block content %}
+		{% endblock %}
+
+		<!--- Beginning of the right section -->
+		<div class="right">
+			<div class="top">
+				<button class="menu-btn">
+					<span class="material-icons-sharp">menu</span>
+				</button>
+				<div class="theme-toggler">
+					<span class="material-icons-sharp active">light_mode</span>
+					<span class="material-icons-sharp">dark_mode</span>
+				</div>
+				<div class="profile">
+					<div class="info">
+						<p>Hey, <b> {{ username }}</b></p>
+						<small class="text-muted">Admin</small>					
+				</div>
+				<div class="profile-photo">
+					<img src="../static/images/yemisi.jpg">
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- End of the Top
+			<div class="recent-updates">
+			<h2>Recent updates</h2>
+			<div class="updates">
+				<div class="update">
+					<div class="message">
+						<p> <b>A new user</b> from Canada</p>
+						<small class="text-muted">1 Minutes Ago</small>
+					</div>	
+				</div>
+
+				<div class="update">
+					<div class="message">
+						<p> <b>A new user</b> from Nigeria</p>
+						<small class="text-muted">4 Minutes Ago</small>
+					</div>	
+				</div>
+
+				
+				<div class="update">
+					<div class="message">
+						<p> <b>A new user</b> from Uk</p>
+						<small class="text-muted">10 Minutes Ago</small>
+					</div>	
+				</div>
+
+
+				
+				
+				</div>
+			</div>
+			 -->
+
+	</div>
+	<!-- End of the right section -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type=text/javascript src="{{ url_for('static', filename='/js/index.js') }}"></script> 
+</body>
+</html>

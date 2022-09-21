@@ -19,12 +19,21 @@
 	--border-radius-2:  0.8rem;
 	--border-radius-3:  1.2rem;
 
-	--card-padding:  1.8rem;
+	--card-padding:  2rem;
 	--padding: 1.2rem;
 
 	--box-shadow: 0 2rem 3rem var(--color-light);
 
 
+}
+
+.dark-theme-variables{
+	--color-background:#181a1e;
+	--color-white: #202528;
+	--color-dark: #edeffd;
+	--color-dark-variant: #a3bdcc;
+	--color-light: rgba(0, 0, 0, 0.4);
+	--box-shadow: 0 2rem 3rem var(--color-light);
 }
 
 /*==============================  end of root variables ============*/
@@ -149,7 +158,7 @@ aside {
 
 }
 aside .top{
-	background: white;
+	background: var(--color-white);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -291,6 +300,8 @@ main .insights > div span{
 
 }
 
+
+
 main .insights > div.expenses span{
 	background: var(--color-danger);
 
@@ -367,6 +378,18 @@ main .insights .progress .number{
 main .insights small {
 	margin-top:1.3rem;
 	display: block;
+	text-overflow: ellipsis;
+	width: 220px;
+	overflow: hidden;
+	white-space: nowrap;
+
+	
+
+}
+
+main .insights small:hover{
+	overflow: visible;
+	white-space: normal;
 }
 
 /*============== Recent users================== */
@@ -494,4 +517,25 @@ main a{
 	gap:  1rem;
 	margin-bottom: 1rem;
 
+}
+
+/*****terms.html styling********************/
+
+.search_terms{
+	width: 900px;
+
+}
+
+/********analytics.html*********/
+
+.submit_button {
+	display: inline-block;
+	margin: 50px;
+}
+
+.submit_button input{
+	background-color: var(--color-primary);
+	width: 100px;
+	height: 50px;
+	border-radius: var(--border-radius-1);
 }

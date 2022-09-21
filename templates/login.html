@@ -8,7 +8,16 @@
 <body>
     <div class="login-panel">
       <span class="material-icons-sharp">account_circle</span>
-      <h1>Login Here </h1>
+      {% with messages= get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="error">
+              <p>{{msg}}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <h1>Login Here </h1>    
       <form method="POST">
         <p>Username</p>
         <input type="text" name="username" placeholder="Enter Username">
