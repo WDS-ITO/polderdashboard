@@ -109,7 +109,7 @@ def analytics():
 
     return render_template('analytics.html')
 
-
+# A helper method that checks the validity of the date entered by the user
 def date_check(startdate, enddate):
     start_date = startdate
     end_date = enddate
