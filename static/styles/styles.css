@@ -255,7 +255,7 @@ aside .sidebar a:hover span{
 	margin-left: 1rem;
 }
 
-/*======Main ======= */
+/*=============================================================================================================Main ======================================*/
 
 
 main {
@@ -313,12 +313,25 @@ main .insights > div span{
 
 
 
-main .insights > div.expenses span{
+main .insights > div.bounce_rate span{
 	background: var(--color-danger);
 
 }
 
-main .insights > div.income span{
+main .insights > div.sessions_with_searches span{
+	background: var(--color-danger);
+
+}
+
+main .insights > div.new_searches span{
+	background: var(--color-success);
+
+}
+main .insights > div.search_depth span{
+	background: var(--color-success);
+
+}
+main .insights > div.load_time span{
 	background: var(--color-success);
 
 }
@@ -359,18 +372,18 @@ main .insights svg circle{
 	
 }
 
-main .insights .sales svg circle{
+main .insights .user_count svg circle{
 	stroke-dasharray: 200;
 	stroke-dashoffset: -30;
 }
 
 
-main .insights .expenses svg circle{
+main .insights .bounce_rate svg circle{
 	stroke-dasharray: 80;
 	stroke-dashoffset: 20;
 }
 
-main .insights .income svg circle{
+main .insights .load_time svg circle{
 	stroke-dasharray: 110;
 	stroke-dashoffset: 35;
 }
@@ -405,16 +418,16 @@ main .insights small:hover{
 
 /*============== Recent users================== */
 
-main .recent-orders {
+main .tables {
 	margin-top: 2rem;
 }
 
-main .recent-orders h2{
+main .tables h2{
 	margin-bottom: 0.8rem;
 }
 
 
-main .recent-orders table{
+main .tables table{
 	background: var(--color-white);
 	width: 100%;
 	border-radius: var(--card-border-radius);
@@ -424,7 +437,7 @@ main .recent-orders table{
 	transition: all 300ms ease;
 }
 
-main .recent-orders table:hover{
+main .tables table:hover{
 	box-shadow: none;
 }
 

@@ -8,18 +8,28 @@ from datetime import *
 
 
 
+
+
+
 app = Flask(__name__)
 app.secret_key = 'polder_dashboard'
 app.permanent_session_life = timedelta(minutes=10)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
+app.app_context().push()
 
 
-## google analytics testing
+
+
+
+
+
+
 
 
 
@@ -43,46 +53,31 @@ def home():
 		user  = User.query.filter_by(username=username).first()
 		if user and bcrypt.check_password_hash(user.password,password):	
 			session['user_id'] = userid
+			session['username'] = username
 			return redirect(url_for('dashboard'))
 		flash('The password is incorrect!')
 		return redirect(url_for('home'))
-		""" else:
-		if 'user_id' in session:
-			return redirect(url_for('dashboard'))"""			
-	
 
 	return render_template("login.html")
 
 
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
+	#Start
 	start_date = '2022-07-01'
 	end_date = 'today'
 	if 'user_id' in session:
 		user_id = session['user_id']
-		username = 'karen'
+		username = session['username']
 		if request.method =='POST':
 			start_date = request.form['start_date']
 			end_date = request.form['end_date']
 			
-			if start_date > end_date:
-				flash('Please enter correct dates')
-				start_date = '2022-07-01'
-				end_date = 'today'
-			if start_date=='' or end_date == '' :
-				flash('Please enter a start date and end date')
-				start_date = '2022-07-01'
-				end_date = 'today'
-
-			if start_date < '2022-07-11':
-				flash('please enter a start date after July 11th')
-				start_date = '2022-07-01'
-				end_date = 'today'
-
-			if start_date > str(date.today()):
-				flash('You cannot enter a date in the future')
-				start_date = '2022-07-01'
-				end_date = 'today'
+			correct_date =date_check(start_date,end_date) 
+			start_date = correct_date['startdate']
+			end_date = correct_date['enddate']
+			if correct_date['message']!='':
+				flash(correct_date['message'])
 
 			
 			
@@ -99,6 +94,15 @@ def search_terms():
 	if request.method == 'POST':
 		start_date = request.form['start_date']
 		end_date = request.form['end_date']
+
+
+		correct_date =date_check(start_date,end_date) 
+		start_date = correct_date['startdate']
+		end_date = correct_date['enddate']
+		if correct_date['message']!='':
+			flash(correct_date['message'])
+
+		
 	return render_template('terms.html', terms_dict= ga.get_analytics_date(start_date,end_date), data=ga.get_analytics_date(start_date,end_date)['search_data'])
 
 
@@ -119,7 +123,31 @@ def analytics():
 
 	return render_template('analytics.html')
 	
+def date_check(startdate,enddate):
+	start_date = startdate
+	end_date = enddate
+	message = ''
+	if start_date > end_date:
+		message = 'Please enter correct dates'
+		start_date = '2022-07-01'
+		end_date = 'today'
+	if start_date=='' or end_date == '' :
+		message = 'Please enter a start date and end date'
+	
+		start_date = '2022-07-01'
+		end_date = 'today'
+
+	if start_date < '2022-07-11':
+		message = 'please enter a start date after July 11th'
+		start_date = '2022-07-01'
+		end_date = 'today'
+
+	if start_date > str(date.today()):
+		message = 'You cannot enter a date in the future'
+		start_date = '2022-07-01'
+		end_date = 'today'
+	return {'startdate': start_date,
+			'enddate': end_date,
+			'message': message}
 if __name__ == '__main__':
 	app.run(debug=True)
-
-
