@@ -5,6 +5,16 @@
 			<form action="" method="POST">
 				<h3>Please enter the time period to get data from</h3>
 				<p>Note: We started collecting analytics on July 11th 2022</p>
+				{% with messages= get_flashed_messages() %}
+				    {% if messages %}
+				            {% for msg in messages %}
+				            <div class="date-error">
+				              <p>{{msg}}</p>
+				            </div>
+				            {% endfor %}
+				    {% endif %}
+				{% endwith %}
+						
 				<div class="date start">
 					<h3>Start Date</h3>
 					<input type="date" name="start_date" >	
@@ -19,7 +29,7 @@
 			</form>
 			<div class="insights">
 				<!-----Average search Duration----->
-				<div class="sales">
+				<div class="search_duration">
 					<span class="material-icons-sharp">analytics</span>
 					<div class="middle">
 						<div class="left">
@@ -33,7 +43,7 @@
 				<!----- end of Average search Duration----->
 
 				<!-----% of sessions with searches----->
-				<div class="expenses">
+				<div class="sessions_with_searches">
 					<span class="material-icons-sharp">star</span>
 					<div class="middle">
 						<div class="left">
@@ -47,7 +57,7 @@
 				<!----- % of sessions with searches----->
 
 				<!-----Average search depth----->
-				<div class="income">
+				<div class="search_depth">
 					<span class="material-icons-sharp">pending</span>
 					<div class="middle">
 						<div class="left">
@@ -60,7 +70,7 @@
 				</div>
 				<!----- end of average search depth----->
 
-				<div class="income">
+				<div class="new_searches">
 					<span class="material-icons-sharp">query_stats</span>
 					<div class="middle">
 						<div class="left">
@@ -73,7 +83,7 @@
 				</div>
 			</div>
 			
-			<div class="recent-orders search_terms">
+			<div class="tables search_terms">
 				<h2> Search Terms</h2>
 				<table>
 					<thead>
