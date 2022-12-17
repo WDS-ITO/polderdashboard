@@ -19,6 +19,7 @@ bcrypt = Bcrypt(app)
 
 app.app_context().push()
 
+start_date = '2022-07-01'
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,8 +50,7 @@ def home():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    # Start
-    start_date = '2022-07-01'
+    global start_date
     end_date = 'today'
     if 'user_id' in session:
         user_id = session['user_id']
@@ -75,7 +75,7 @@ def dashboard():
 
 @app.route('/search_terms', methods=['GET', 'POST'])
 def search_terms():
-    start_date = '2022-07-01'
+    global start_date
     end_date = 'today'
     if request.method == 'POST':
         start_date = request.form['start_date']
@@ -95,7 +95,7 @@ def search_terms():
 
 @app.route('/repositories', methods=['GET', 'POST'])
 def repositories():
-    start_date = '2022-07-01'
+    global start_date
     end_date = 'today'
     total_results = polder.get_total_results()
     if request.method == 'POST':
@@ -120,15 +120,15 @@ def date_check(startdate, enddate):
     elif start_date == '' or end_date == '':
         message = 'Please enter a start date and end date'
 
-    elif start_date < '2022-07-11':
-        message = 'please enter a start date after July 11th'
+    elif start_date < '2022-07-01':
+        message = 'please enter a start date after July 1st'
 
     elif start_date > str(date.today()):
         message = 'You cannot enter a date in the future'
 
     return {'startdate': start_date,
             'enddate': end_date,
-            'message': message}
+            'message': message }
 
 
 if __name__ == '__main__':

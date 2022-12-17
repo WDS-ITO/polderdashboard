@@ -1,17 +1,17 @@
 import requests
-from bs4 import BeautifulSoup
-
+import json
 
 def get_total_results():
-	url = 'https://search.polder.info/search?text='
+	link = "https://search.polder.info/api/count"
+	response = requests.get(link)
+
+	# Convert JSON data to a python object
+	data = json.loads(response.text)
+	return data
 
 
 
-	res = requests.get(url)
 
 
-	data = BeautifulSoup(res.text, 'html.parser')
-	total_result = data.find_all('p', class_='results__number')[0].get_text()
-	split = total_result.split()
-	total_result = split[len(split)-1]
-	return total_result
+
+
