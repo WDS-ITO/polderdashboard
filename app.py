@@ -19,7 +19,7 @@ bcrypt = Bcrypt(app)
 
 app.app_context().push()
 
-start_date = '2022-07-01'
+START_DATE = '2022-07-01'
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,7 +50,8 @@ def home():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    global start_date
+    global START_DATE
+    start_date = START_DATE
     end_date = 'today'
     if 'user_id' in session:
         user_id = session['user_id']
@@ -63,10 +64,9 @@ def dashboard():
             start_date = correct_date['startdate']
             end_date = correct_date['enddate']
             if correct_date['message'] != '':
-                start_date = '2022-07-01'
+                start_date = START_DATE
                 end_date = 'today'
                 flash(correct_date['message'])
-
         return render_template("dashboard.html", username=username, terms_dict=ga.get_terms(), analytics_dict=ga.get_analytics_date(start_date, end_date))
     else:
         return redirect(url_for('home'))
@@ -75,7 +75,8 @@ def dashboard():
 
 @app.route('/search_terms', methods=['GET', 'POST'])
 def search_terms():
-    global start_date
+    global START_DATE
+    start_date = START_DATE
     end_date = 'today'
     if request.method == 'POST':
         start_date = request.form['start_date']
@@ -85,7 +86,7 @@ def search_terms():
         start_date = correct_date['startdate']
         end_date = correct_date['enddate']
         if correct_date['message'] != '':
-        	start_date = '2022-07-01'
+        	start_date = START_DATE
         	end_date = 'today'
         	flash(correct_date['message'])
             
@@ -95,7 +96,7 @@ def search_terms():
 
 @app.route('/repositories', methods=['GET', 'POST'])
 def repositories():
-    global start_date
+    global START_DATE
     end_date = 'today'
     total_results = polder.get_total_results()
     if request.method == 'POST':
@@ -111,6 +112,7 @@ def analytics():
 
 # A helper method that checks the validity of the date entered by the user
 def date_check(startdate, enddate):
+    global START_DATE
     start_date = startdate
     end_date = enddate
     message = ''
@@ -120,7 +122,7 @@ def date_check(startdate, enddate):
     elif start_date == '' or end_date == '':
         message = 'Please enter a start date and end date'
 
-    elif start_date < '2022-07-01':
+    elif start_date < START_DATE:
         message = 'please enter a start date after July 1st'
 
     elif start_date > str(date.today()):
